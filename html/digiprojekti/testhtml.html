@@ -1,0 +1,88 @@
+<!doctype html>
+
+<html>
+<meta charset="utf-8">
+    <title>javascript-harjoitus
+    </title>
+<!-- Jquery -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/grt-responsive-menu.js"></script>
+        
+        
+        <link rel="stylesheet" href="css/jquery.bxslider.css">
+        <script src="js/jquery.bxslider.js"></script>
+
+        <link rel="stylesheet" href="css/lightbox.css">
+        <script src="js/lightbox.min.js"></script>
+        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        
+		<div class="container-fluid" style= margin-top:60px;>
+            
+
+<head>
+	
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Digiprojekti</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="testcss.css">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		
+
+
+        
+        
+</head>
+
+
+
+		<!-- GRT Youtube Plugin CSS -->
+		<link rel="stylesheet" href="css/grt-responsive-menu.css">
+<div id="#testi">
+            </div>
+
+<div class="container">  
+  <form id="contact" action="" method="post">
+  
+<div id="testi"></div>
+   
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+    </fieldset>
+    <p class="copyright">Designed by <a href="https://colorlib.com" target="_blank" title="Colorlib">Colorlib</a></p>
+  </form>
+</div>
+    <script>
+/* {"id":1,
+"kysymysteksti":"Millainen on tiimin työskentelyilmapiiri tällä hetkellä?",
+"kysely":{"id":1,"nimi":null,"kuvaus":null},
+"tyyppi":"avoin"}
+
+*/
+
+var items = []
+
+
+    $.getJSON("https://survey-appi.herokuapp.com/surveys", function(result){
+       var kysely = result[0].name;
+        items.push("<h3>" + kysely + "</h3>");
+        var kysymykset = result[0].questions;
+        $.each(kysymykset, function(i, field){
+        items.push(field.question + "<br>");
+        items.push("<textarea id="+ field.id +">" + "</textarea>")
+          
+        });
+          $("#testi").append( items.join("") );
+    });
+
+
+
+
+
+</script>
+    
+    
+</html>

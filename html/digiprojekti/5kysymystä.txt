@@ -1,0 +1,10 @@
+1.Koetko että vessat ovat viihtyisiä? kyllä/ei
+2.Mitä haluaisit lisätä vessoihin? avoin
+3.Siivotanko vessoja mielestäsi tarpeeksi usein? kyllä/ei/en osaa sanoa
+4.Käytätkö tiettyjä vessoja? kyllä/ei
+5.Mikä näistä lisäyksistä olisi mieluisimpia?
+	1.Käsidesi
+	2.Käsikuivaimet
+	3.Automatisoidut ovet
+	4.Ilmanraikastimia
+	5.Vesipiste pullon täytölle
