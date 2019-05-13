@@ -1,0 +1,180 @@
+<!doctype html>
+
+<html>
+<meta charset="utf-8">
+    <title>Haaga-helia vessakysely
+    </title>
+<!-- Jquery -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+       
+        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+        
+		<div class="container-fluid" style= margin-top:60px;>
+            
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139646883-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139646883-1');
+</script>
+
+	
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Digiprojekti</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="testcss.css">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		
+
+
+        
+        
+</head>
+
+
+
+		<!-- GRT Youtube Plugin CSS -->
+		<link rel="stylesheet" href="css/grt-responsive-menu.css">
+<div id="#testi">
+            </div>
+
+<div class="container">  
+  <form id="contact" action="" method="post">
+  
+<div id="testi"></div>
+   
+    <fieldset>
+      <button onclick="laheta()" name="submit" type="submit" id="vastaus">Lähetä</button>
+    </fieldset>
+     </form>
+</div>
+    <script>
+/* {"id":1,
+"kysymysteksti":"Millainen on tiimin työskentelyilmapiiri tällä hetkellä?",
+"kysely":{"id":1,"nimi":null,"kuvaus":null},
+"tyyppi":"avoin"}
+
+*/
+
+var items = [];
+var tunnukset =[];
+
+    $.getJSON("https://kyselysofta-sprint-2.herokuapp.com/surveys", function(result){
+       var kysely = result[0].name;
+        items.push("<h3>" + kysely + "</h3>");
+        var kysymykset = result[0].questions;
+        
+        var kuvaus = result[0].description;
+        items.push("<p>" + kuvaus + "<p>")
+        
+        $.each(kysymykset, function(i, d){
+        items.push(d.question + "<br>");
+          
+        if (d.answerType=="Textarea"){
+        items.push("<textarea id="+ d.questionId +">" + "</textarea>")
+        tunnukset.push(d.questionId);
+
+        };
+            if (d.answerType=="radio"){
+            for (i = 0; i < d.options.length; i++) { 
+            items.push("<input type=radio" + " id= "+ d.questionId+ "   name="+d.questionId+" value="+ d.options[i].option+" >"+d.options[i].option+"<br>" );
+                 
+              
+	 }
+        tunnukset.push(d.questionId);
+        }; 
+            
+        if (d.answerType=="checkbox"){
+            for (i = 0; i < d.options.length; i++) { 
+            items.push("<input type=checkbox" + " id= "+ d.questionId+ "   name="+d.questionId+" value="+ d.options[i].option+" >"+d.options[i].option+"<br>" );
+                 
+              
+	 }
+        tunnukset.push(d.questionId);
+        }
+            
+        })
+       
+          $("#testi").append( items.join("") );
+    });
+
+function laheta(){
+    for (i =0; i < tunnukset.length; i++ ){tyyppi=document.getElementById(tunnukset[i]).type;
+    if (tyyppi == "textarea"){
+     vastaus = document.getElementById(tunnukset[i]).value; 
+        
+       var jsonData ={"answer" : vastaus
+                        ,"question" : {"questionId" : tunnukset[i]}}
+           ;
+          var myJSON = JSON.stringify(jsonData);
+alert(myJSON);
+            $.ajax({
+    url: "https://kyselysofta-sprint-2.herokuapp.com/addanswer" ,
+    type: 'POST',
+     dataType: 'application/json',
+    contentType: 'application/json',
+    data: myJSON, 
+    success: function() { alert('POST completed. Data:' + myJSON)}
+});
+
+        
+        
+    }
+                                           
+    if (tyyppi == "checkbox"){
+        var radios = document.getElementsByName(tunnukset[i]);
+         for (var x = 0, length = radios.length; x < length; x++){
+           
+        if (radios[x].checked){ 
+               vastaus=radios[x].value;
+            
+            
+           var jsonData ={"answer" : vastaus
+                        ,"question" : {"questionId" : tunnukset[i]}}
+           ;
+          var myJSON = JSON.stringify(jsonData);
+alert(myJSON);
+            $.ajax({
+    url: "https://kyselysofta-sprint-2.herokuapp.com/addanswer" ,
+    type: 'POST',
+     dataType: 'application/json',
+    contentType: 'application/json',
+    data: myJSON, 
+    success: function() { alert('POST completed. Data:' + myJSON)}
+});
+
+            
+             }
+        }
+
+    }
+    
+       
+    
+}
+
+    
+    
+
+//var jsonData = {"answer" : vastaus ,"question" : {"questionId" : tunnukset[i]}//
+};
+
+
+
+
+</script>
+
+
+    
+    
+</html>
