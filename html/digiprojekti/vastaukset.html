@@ -1,0 +1,123 @@
+<!doctype html>
+
+<html>
+<meta charset="utf-8">
+    <title>Haaga-helia vessakysely
+    </title>
+<!-- Jquery -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+       
+        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+        
+		<div class="container-fluid" style= margin-top:60px;>
+            
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139646883-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139646883-1');
+</script>
+
+	
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Digiprojekti</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="testcss.css">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		
+  <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load Charts and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Draw the pie chart for Sarah's pizza when Charts is loaded.
+      google.charts.setOnLoadCallback(drawSarahChart);
+
+      // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+      google.charts.setOnLoadCallback(drawAnthonyChart);
+
+      // Callback that draws the pie chart for Sarah's pizza.
+      function drawSarahChart() {
+
+        // Create the data table for Sarah's pizza.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Kyllä', 5],
+          ['Ei', 3],
+          ['En osaa sanoa', 2],
+         
+        ]);
+
+        // Set options for Sarah's pie chart.
+        var options = {title:'Siivotaanko vessoja mielestäsi tarpeeksi usein?',
+                       width:400,
+                       height:300};
+
+        // Instantiate and draw the chart for Sarah's pizza.
+        var chart = new google.visualization.PieChart(document.getElementById('Sarah_chart_div'));
+        chart.draw(data, options);
+      }
+
+      // Callback that draws the pie chart for Anthony's pizza.
+      function drawAnthonyChart() {
+
+        // Create the data table for Anthony's pizza.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Käsidesi', 5],
+          ['Kädenkuivaimet', 2],
+          ['Automaattiset ovet', 1],
+          ['ilmanraikastimet',4 ],
+        ['Vesipullon täyttöpiste', 1],
+       
+        ]);
+
+        // Set options for Anthony's pie chart.
+        var options = {title:'Mikä lisäys olisi mieluisin?',
+                       width:400,
+                       height:300};
+
+        // Instantiate and draw the chart for Anthony's pizza.
+        var chart = new google.visualization.PieChart(document.getElementById('Anthony_chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+
+<body>
+   <div><h1>Kiitos vastauksestasi!</h1></div>
+    <table class="columns">
+      <tr>
+        <td><div id="Sarah_chart_div" style="border: 1px solid #ccc"></div></td>
+        <td><div id="Anthony_chart_div" style="border: 1px solid #ccc"></div></td>
+      </tr>
+    </table>
+ <div>
+    <h1>Koetko että vessat ovat viihtyisiä?</h1>
+     "En yleensä viihdy vessassa"<br>
+     "Kyllä, voisinpa viettää siellä enemmän aikaa"<br>
+     <h1>Mitä haluaisit lisätä vessoihin?</h1>
+     "Parempi valaistus"<br>
+     <h1>Käytätkö tiettyjä vessoja?</h1>
+     "Aina 7. kerroksen vessaa!"<br>
+     "En ajattele asiaa"<br>
+    </div>
+</body>
+    </html>
